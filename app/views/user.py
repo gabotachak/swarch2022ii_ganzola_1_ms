@@ -25,6 +25,6 @@ def get_user_by_params():
     """Get user by query params."""
 
     params = schemas.SearchUser().load(request.args)
-    res = app.user_controller.search_user(params).to_dict()
+    res = app.user_controller.search_user(params)
 
     return jsonify(res), HTTPStatus.OK

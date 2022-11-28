@@ -5,6 +5,6 @@ class NotFoundException(Exception):
 
 
 class UserNotFoundException(NotFoundException):
-    def __init__(self, user: str = None):
+    def __init__(self, user=None):
         self.resource = "User"
         self.resource_id = user

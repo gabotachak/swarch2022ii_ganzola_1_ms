@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, VARCHAR, Column, ForeignKey, DateTime, INTEGER
+from sqlalchemy import MetaData, Table, VARCHAR, Column, ForeignKey, DateTime, INTEGER, DECIMAL
 from sqlalchemy.orm import mapper
 from sqlalchemy.sql.functions import now
 
@@ -22,6 +22,7 @@ transaction = Table(
     Column("id_transaction", INTEGER, primary_key=True, nullable=False, unique=True, autoincrement=True),
     Column("sender", ForeignKey("user.id_user"), nullable=True),
     Column("receiver", ForeignKey("user.id_user"), nullable=True),
+    Column("amount", DECIMAL(10, 2), nullable=True),
     Column("transaction_time", DateTime(timezone=True), server_default=now()),
 )
 
