@@ -1,12 +1,12 @@
 """Flask app creation."""
-from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect
 
-from app.views import *
 # from app.database import orm
 from app.modules import *
+from app.repositories import orm
+from app.views import *
 
 # Active endpoints noted as following:
 # (url_prefix, blueprint_object)
@@ -34,7 +34,7 @@ def create_app(start_orm: bool = False):
     for endpoint in ACTIVE_ENDPOINTS:
         app.register_blueprint(ACTIVE_ENDPOINTS[endpoint], url_prefix=endpoint)
 
-    # if start_orm:
-    #     orm.start_mappers()
+    if start_orm:
+        orm.start_mappers()
 
     return app
