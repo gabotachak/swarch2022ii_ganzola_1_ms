@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from app.controllers import UserController
+
 
 def new_session_factory():
     load_dotenv()
@@ -21,3 +23,5 @@ def new_session_factory():
 
 session_factory = new_session_factory()
 db_session = session_factory()
+
+user_controller = UserController(db_session)

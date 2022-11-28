@@ -2,8 +2,7 @@ from sqlalchemy import MetaData, Table, VARCHAR, Column, ForeignKey, DateTime, I
 from sqlalchemy.orm import mapper
 from sqlalchemy.sql.functions import now
 
-from app.models.transaction import Transaction
-from app.models.user import User
+from app.models import User, Transaction
 from app.utils.log import logger
 
 metadata = MetaData()

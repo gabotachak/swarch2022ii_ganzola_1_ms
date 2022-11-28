@@ -12,9 +12,9 @@ class User:
             username: str = None
     ):
         self.id_user = id_user
-        self.first_name = first_name.title()
-        self.last_name = last_name.title()
-        self.username = username.lower()
+        self.first_name = first_name.title() if first_name else None
+        self.last_name = last_name.title() if last_name else None
+        self.username = username.lower() if username else None
 
     def to_dict(self):
         return {

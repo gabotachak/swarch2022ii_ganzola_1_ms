@@ -11,7 +11,8 @@ from app.views import *
 # Active endpoints noted as following:
 # (url_prefix, blueprint_object)
 ACTIVE_ENDPOINTS = {
-    "/ping": ping_view
+    "/ping": ping_view,
+    "/user": user_view
 }
 
 
