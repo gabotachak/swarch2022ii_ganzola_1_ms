@@ -4,6 +4,10 @@ class User:
     last_name: str
     username: str
 
+    class Meta:
+        table_name = "user"
+        fields = ("id_user", "first_name", "last_name", "username")
+
     def __init__(
             self,
             id_user: int = None,

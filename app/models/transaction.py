@@ -8,6 +8,10 @@ class Transaction:
     amount: float
     transaction_time: datetime
 
+    class Meta:
+        table_name = "transaction"
+        fields = ("id_transaction", "sender", "receiver", "amount", "transaction_time")
+
     def __init__(
             self,
             id_transaction: int = None,

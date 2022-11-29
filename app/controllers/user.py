@@ -3,7 +3,6 @@ from sqlalchemy.orm import session
 
 from app import models
 from app.exceptions import UserNotFoundException, UserAlreadyExistsException
-from app.utils.log import logger
 
 
 class UserController:
