@@ -1,16 +1,19 @@
 from datetime import datetime
 
+from sqlalchemy import Column, Integer, ForeignKey, DECIMAL, DateTime
+from sqlalchemy.sql.functions import now
 
-class Transaction:
-    id_transaction: int
-    sender: str
-    receiver: str
-    amount: float
-    transaction_time: datetime
+from app.repositories.orm import Base
 
-    class Meta:
-        table_name = "transaction"
-        fields = ("id_transaction", "sender", "receiver", "amount", "transaction_time")
+
+class Transaction(Base):
+    __tablename__ = 'transaction'
+
+    id_transaction = Column(Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    sender = Column(ForeignKey("user.id_user"), nullable=True)
+    receiver = Column(ForeignKey("user.id_user"), nullable=True)
+    amount = Column(DECIMAL(10, 2), nullable=True)
+    transaction_time = Column(DateTime(timezone=True), server_default=now())
 
     def __init__(
             self,

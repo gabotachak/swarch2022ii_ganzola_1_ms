@@ -1,33 +1,23 @@
-from sqlalchemy import MetaData, Table, VARCHAR, Column, ForeignKey, DateTime, INTEGER, DECIMAL
-from sqlalchemy.orm import mapper
-from sqlalchemy.sql.functions import now
+import os
 
-from app.models import User, Transaction
-from app.utils.log import logger
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-metadata = MetaData()
+load_dotenv()
 
-user = Table(
-    "user",
-    metadata,
-    Column("id_user", INTEGER, primary_key=True, nullable=False, unique=True, autoincrement=True),
-    Column("first_name", VARCHAR(45), nullable=True),
-    Column("last_name", VARCHAR(45), nullable=True),
-    Column("username", VARCHAR(20), nullable=False, unique=True),
-)
+db_host = os.getenv("DB_HOST", "")
+db_port = os.getenv("DB_PORT", "")
+db_schema = os.getenv("DB_SCHEMA", "")
+db_user = os.getenv("DB_USER", "")
+db_password = os.getenv("DB_PASSWORD", "")
 
-transaction = Table(
-    "transaction",
-    metadata,
-    Column("id_transaction", INTEGER, primary_key=True, nullable=False, unique=True, autoincrement=True),
-    Column("sender", ForeignKey("user.id_user"), nullable=True),
-    Column("receiver", ForeignKey("user.id_user"), nullable=True),
-    Column("amount", DECIMAL(10, 2), nullable=True),
-    Column("transaction_time", DateTime(timezone=True), server_default=now()),
-)
+uri = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_schema}"
 
+engine = create_engine(uri, echo=True)
 
-def start_mappers():
-    logger.info("================> Starting mappers")
-    mapper(User, user)
-    mapper(Transaction, transaction)
+Session = sessionmaker(bind=engine)
+db_session = Session()
+
+Base = declarative_base()
+Base.metadata.create_all(engine)

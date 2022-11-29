@@ -1,12 +1,15 @@
-class User:
-    id_user: str
-    first_name: str
-    last_name: str
-    username: str
+from sqlalchemy import Column, Integer, VARCHAR
 
-    class Meta:
-        table_name = "user"
-        fields = ("id_user", "first_name", "last_name", "username")
+from app.repositories.orm import Base
+
+
+class User(Base):
+    __tablename__ = 'user'
+
+    id_user = Column(Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    first_name = Column(VARCHAR(45), nullable=True)
+    last_name = Column(VARCHAR(45), nullable=True)
+    username = Column(VARCHAR(45), nullable=False, unique=True)
 
     def __init__(
             self,
