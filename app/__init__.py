@@ -3,16 +3,14 @@ from flask import Flask
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect
 
-# from app.database import orm
 from app.modules import *
 from app.repositories import orm
 from app.views import *
 
-# Active endpoints noted as following:
-# (url_prefix, blueprint_object)
 ACTIVE_ENDPOINTS = {
     "/ping": ping_view,
-    "/user": user_view
+    "/user": user_view,
+    "/transaction": transaction_view
 }
 
 

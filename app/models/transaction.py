@@ -1,20 +1,18 @@
 from datetime import datetime
 
-from app.models.user import User
-
 
 class Transaction:
     id_transaction: int
-    sender: User
-    receiver: User
+    sender: str
+    receiver: str
     amount: float
     transaction_time: datetime
 
     def __init__(
             self,
             id_transaction: int = None,
-            sender: User = None,
-            receiver: User = None,
+            sender: str = None,
+            receiver: str = None,
             amount: float = None,
             transaction_time: datetime = None
     ):
@@ -27,8 +25,8 @@ class Transaction:
     def to_dict(self):
         return {
             "id_transaction": self.id_transaction,
-            "sender": self.sender.to_dict(),
-            "receiver": self.receiver.to_dict(),
+            "sender": self.sender,
+            "receiver": self.receiver,
             "amount": self.amount,
             "transaction_time": self.transaction_time
         }

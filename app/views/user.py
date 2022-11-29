@@ -1,4 +1,4 @@
-"""Module with ping endpoint."""
+"""Module with user endpoints."""
 from http import HTTPStatus
 
 from flask import Blueprint, jsonify, request

@@ -8,3 +8,9 @@ class UserNotFoundException(NotFoundException):
     def __init__(self, user=None):
         self.resource = "User"
         self.resource_id = user
+
+
+class TransactionNotFoundException(NotFoundException):
+    def __init__(self, transaction=None):
+        self.resource = "Transaction"
+        self.resource_id = transaction
