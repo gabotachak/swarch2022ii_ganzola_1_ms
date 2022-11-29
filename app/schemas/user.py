@@ -15,3 +15,13 @@ class SearchUser(Schema):
             raise ValidationError("No params provided")
 
         return {k: v for k, v in models.User(**data).to_dict().items() if v is not None}
+
+
+class CreateUser(Schema):
+    first_name = fields.Str(validate=Length(min=1, max=20))
+    last_name = fields.Str(validate=Length(min=1, max=20))
+    username = fields.Str(validate=Length(min=1, max=20))
+
+    @post_load
+    def make(self, data, **kwargs):
+        return models.User(**data)

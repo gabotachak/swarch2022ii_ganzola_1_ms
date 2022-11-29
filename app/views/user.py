@@ -28,3 +28,14 @@ def get_user_by_params():
     res = app.user_controller.search_user(params)
 
     return jsonify(res), HTTPStatus.OK
+
+
+@user_view.route("/", methods=["POST"])
+@error_decorator
+def create_user():
+    """Create user."""
+
+    user = schemas.CreateUser().load(request.json)
+    res = app.user_controller.create_user(user)
+
+    return jsonify(res), HTTPStatus.CREATED

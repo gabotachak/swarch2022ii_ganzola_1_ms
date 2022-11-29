@@ -2,7 +2,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import session
 
 from app import models
-from app.exceptions import UserNotFoundException
+from app.exceptions import UserNotFoundException, UserAlreadyExistsException
 from app.utils.log import logger
 
 
@@ -25,3 +25,12 @@ class UserController:
         user_dict["balance"] = float(income - outcome)
 
         return user_dict
+
+    def create_user(self, user: models.User) -> dict:
+        if self.db_session.query(models.User).filter_by(username=user.username).first():
+            raise UserAlreadyExistsException(user.username)
+
+        self.db_session.add(user)
+        self.db_session.commit()
+
+        return user.to_dict()
