@@ -27,7 +27,7 @@ class Transaction:
             "id_transaction": self.id_transaction,
             "sender": self.sender,
             "receiver": self.receiver,
-            "amount": self.amount,
+            "amount": float(self.amount) if self.amount else None,
             "transaction_time": self.transaction_time
         }
 

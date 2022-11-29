@@ -28,3 +28,14 @@ def get_transaction_by_params():
     res = app.transaction_controller.search_transactions(params)
 
     return jsonify(res), HTTPStatus.OK
+
+
+@transaction_view.route("/user", methods=["GET"])
+@error_decorator
+def get_transactions_by_user():
+    """Get transactions by user."""
+
+    params = schemas.SearchUser().load(request.args)
+    res = app.transaction_controller.search_transactions_by_user(params)
+
+    return jsonify(res), HTTPStatus.OK
