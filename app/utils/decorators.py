@@ -4,9 +4,9 @@ from http import HTTPStatus
 from flask import jsonify
 from marshmallow import ValidationError
 
-from app.exceptions import NotFoundException, AlreadyExistsException
-from app.utils.log import logger
+from app.exceptions import NotFoundException, AlreadyExistsException, ForbiddenException
 from app.utils.constants import *
+from app.utils.log import logger
 
 
 def error_decorator(func):
@@ -31,6 +31,12 @@ def error_decorator(func):
             return (
                 jsonify({ERROR_RESPONSE: f"{aee.resource} ({aee.resource_id}) already exists"}),
                 HTTPStatus.CONFLICT,
+            )
+        except ForbiddenException as fe:
+            logger.error(f"{fe.__class__.__name__}")
+            return (
+                jsonify({ERROR_RESPONSE: fe.message}),
+                HTTPStatus.FORBIDDEN,
             )
 
     return wrapper

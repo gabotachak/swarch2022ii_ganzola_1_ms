@@ -39,3 +39,14 @@ def get_transactions_by_user():
     res = app.transaction_controller.search_transactions_by_user(params)
 
     return jsonify(res), HTTPStatus.OK
+
+
+@transaction_view.route("/", methods=["POST"])
+@error_decorator
+def create_transaction():
+    """Create transaction."""
+
+    transaction = schemas.CreateTransaction().load(request.json)
+    res = app.transaction_controller.create_transaction(transaction)
+
+    return jsonify(res), HTTPStatus.CREATED

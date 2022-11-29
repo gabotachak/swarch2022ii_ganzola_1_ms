@@ -20,3 +20,17 @@ class SearchTransaction(Schema):
             raise ValidationError("No params provided")
 
         return {k: v for k, v in models.Transaction(**data).to_dict().items() if v is not None}
+
+
+class CreateTransaction(Schema):
+    sender = fields.Str(
+        validate=[Length(min=1, max=20), Regexp(r"^(\d+|[a-zA-Z]+){1}$", error="id or username not valid")]
+    )
+    receiver = fields.Str(
+        validate=[Length(min=1, max=20), Regexp(r"^(\d+|[a-zA-Z]+){1}$", error="id or username not valid")]
+    )
+    amount = fields.Float(validate=Range(min=1, error="amount cannot be negative"))
+
+    @post_load
+    def make(self, data, **kwargs):
+        return models.Transaction(**data)
