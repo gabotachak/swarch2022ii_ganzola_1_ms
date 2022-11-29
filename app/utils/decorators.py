@@ -38,5 +38,11 @@ def error_decorator(func):
                 jsonify({ERROR_RESPONSE: fe.message}),
                 HTTPStatus.FORBIDDEN,
             )
+        except Exception as e:
+            logger.error(f"{e.__class__.__name__}: {e}")
+            return (
+                jsonify({ERROR_RESPONSE: f"Internal server error ({e})"}),
+                HTTPStatus.INTERNAL_SERVER_ERROR,
+            )
 
     return wrapper
