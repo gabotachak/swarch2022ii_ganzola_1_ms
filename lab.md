@@ -24,7 +24,7 @@ Como ejemplo práctico de la asignatura, se creará un sistema de software distr
 
 ### a. Código Fuente
 
-El código fuente se encuentra en el siguente enlace: [micorservicio](https://github.com/ganzola/swarch2022ii_ganzola_1_ms)
+El código fuente se encuentra en el siguente enlace: [microservicio](https://github.com/ganzola/swarch2022ii_ganzola_1_ms)
 
 ### b. Arquitectura Interna del Microservicio
 
@@ -71,6 +71,6 @@ docker build --tag swarch2022ii_1_ms .
 docker run --name swarch2022ii_1_ms -d -p 4000:5000 swarch2022ii_1_ms
 ```
 
-## iii Endpoints:
+## iii Endpoints
 
-[endpoints](endpoints.json)
+[endpoints](https://github.com/ganzola/swarch2022ii_ganzola_1_ms/blob/main/endpoints.json)
